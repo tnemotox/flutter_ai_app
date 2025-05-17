@@ -1,3 +1,4 @@
+# cache bust 2025-05-17-XXXX
 FROM debian:bullseye
 
 # 必要なパッケージをインストール（Flutter, Python, build関連）
