@@ -1,8 +1,8 @@
 {
   "name": "flutter-ai-dev",
-  "context": "..",
   "build": {
-    "dockerfile": ".devcontainer/Dockerfile"
+    "dockerfile": "../Dockerfile",
+    "context": ".."
   },
   "customizations": {
     "vscode": {
