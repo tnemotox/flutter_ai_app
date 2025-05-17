@@ -1,18 +1,21 @@
 {
-  "name": "Flutter Dev Container",
+  "name": "flutter-ai-dev",
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "settings": {
-    "terminal.integrated.defaultProfile.linux": "bash"
-  },
-  "postCreateCommand": "flutter doctor",
   "customizations": {
     "vscode": {
       "extensions": [
         "Dart-Code.dart-code",
-        "Dart-Code.flutter"
+        "Dart-Code.flutter",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "streetsidesoftware.code-spell-checker"
       ]
     }
-  }
+  },
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+  "remoteUser": "vscode"
 }
