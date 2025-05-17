@@ -33,7 +33,7 @@ RUN flutter precache --android --ios --web --linux --macos --windows || true
 
 # Python ライブラリのインストール
 COPY ../requirements.txt /tmp/requirements.txt
-RUN pip3 install --user --root-user-action=ignore -r /tmp/requirements.txt
+RUN pip3 install --break-system-packages -r /tmp/requirements.txt || pip3 install -r /tmp/requirements.txt
 
 # Flutter キャッシュ生成（失敗しても止めない）
 RUN flutter doctor --android-licenses || true && flutter doctor || true
