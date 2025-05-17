@@ -18,5 +18,6 @@
   "settings": {
     "terminal.integrated.defaultProfile.linux": "bash"
   },
+  "postCreateCommand": "flutter doctor || true",
   "remoteUser": "vscode"
 }
