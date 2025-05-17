@@ -24,4 +24,6 @@ RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 RUN flutter doctor
 
 # ユーザー設定（Codespacesの標準）
+# 末尾に追加（Flutterなどの設定の後）
+RUN useradd -m vscode
 USER vscode
