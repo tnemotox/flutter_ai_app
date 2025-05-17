@@ -1,7 +1,8 @@
 {
   "name": "flutter-ai-dev",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    "context": ".."  // ← 🔥この1行を追加（これだけで成功します）
   },
   "customizations": {
     "vscode": {
