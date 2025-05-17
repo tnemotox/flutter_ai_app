@@ -1,8 +1,7 @@
 {
   "name": "flutter-ai-dev",
   "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."  // ← 🔥この1行を追加（これだけで成功します）
+    "dockerfile": "Dockerfile"
   },
   "customizations": {
     "vscode": {
@@ -18,5 +17,6 @@
   "settings": {
     "terminal.integrated.defaultProfile.linux": "bash"
   },
+  "postCreateCommand": "flutter doctor",
   "remoteUser": "vscode"
 }
