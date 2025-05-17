@@ -1,32 +1,29 @@
-# ベースイメージ（軽量なDebian）
+# 軽量な Debian イメージをベースに使用
 FROM debian:bullseye
 
-# vscodeユーザーを事前に作成（Codespacesと一致させる）
-RUN useradd -m -u 1000 vscode
-
-# 必要パッケージのインストール
+# flutter を /opt/flutter にインストールするために必要なパッケージをインストール
 RUN apt-get update && apt-get install -y \
     git curl unzip xz-utils zip libglu1-mesa bash \
     build-essential wget openssh-client \
-    python3 python3-pip ca-certificates \
+    python3 python3-pip sudo ca-certificates \
     --no-install-recommends && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Flutter をインストール
-RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
+# flutter を /opt/flutter に clone
+RUN git clone https://github.com/flutter/flutter.git /opt/flutter
 
-# Flutter のパス設定
-ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
+# flutter にパスを通す
+ENV PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:${PATH}"
 
-# Python ライブラリのインストール（requirements.txt をルートから取得）
+# flutter repo を git safe.directory に追加（git警告対策）
+RUN git config --global --add safe.directory /opt/flutter
+
+# flutter doctor キャッシュ用に必要ファイル作成（Permission denied 対策）
+RUN mkdir -p /opt/flutter/bin/cache && chmod -R 777 /opt/flutter
+
+# requirements.txt をルートからコピーして Python ライブラリをインストール
 COPY ../requirements.txt /tmp/requirements.txt
 RUN pip3 install --upgrade pip && pip3 install -r /tmp/requirements.txt
 
-# Git の警告を回避（flutter ディレクトリを safe.directory に追加）
-RUN git config --global --add safe.directory /usr/local/flutter
-
-# 作業ディレクトリ
+# デフォルトの作業ディレクトリ
 WORKDIR /workspaces/flutter_ai_app
-
-# vscode ユーザーに切り替え（Codespaceとの整合）
-USER vscode
